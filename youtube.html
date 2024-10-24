@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Anasayfa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Öğeleri yatayda eşit dağıtır */
+            align-items: center; /* Dikeyde ortalar */
+        }
+        
+        .search-form {
+            flex-grow: 1; /* Arama formunun genişlemesini sağlar */
+            display: flex; /* Flexbox düzeni */
+            justify-content: center; /* Ortalar */
+            margin: 0 10px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 10px; /* Buton ile arama kutusu arasında boşluk */
+        }
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Butonlar arasında boşluk */
+            margin-top: 20px; /* Üstten boşluk */
+        }
+
+        .filter-options .btn {
+            flex: 1; /* Butonların eşit genişlikte olmasını sağlar */
+        }
+        .sidebar {
+            height: 100vh;          /* Sidebar yüksekliği tam ekran */
+            overflow-y: auto;       /* Dikey kaydırma ekle */
+            background-color: #f8f9fa; /* Arka plan rengi */
+            padding: 15px;          /* İç boşluk */
+            position: sticky;       /* Kayar özelliği için sticky */
+            top: 0;                 /* Üstte sabitle */
+        }
+
+        .nav-link {
+            color: #333;            /* Metin rengi */
+        }
+
+        .nav-link:hover {
+            background-color: #e2e6ea; /* Hover efekt */
+        }
+        .navbar-nav {
+            margin-left: auto; /* Sağ tarafa taşır */
+        }
+        .video-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .video-meta {
+            color: #606060;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">YouTube</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+
+    <div class="search-form">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Ara</button>
+        </form>
+    </div>
+
+    <div class="search-container">
+        <button id="voiceSearchBtn" class="btn btn-primary">
+            <i class="fas fa-microphone"></i> Sesle Ara
+        </button>
+        <div id="result" class="mt-3"></div>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Oluştur</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bildirimler</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Giriş yap</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="filter-options">
+    <button class="btn btn-outline-secondary">Tüm Videolar</button>
+    <button class="btn btn-outline-secondary">Canlı Yayınlar</button>
+    <button class="btn btn-outline-secondary">Kısa Videolar</button>
+    <button class="btn btn-outline-secondary">Oynatma Listeleri</button>
+    <button class="btn btn-outline-secondary">Kanallar</button>
+    <button class="btn btn-outline-secondary">Film</button>
+</div>
+
+<div class="d-flex">
+    <div class="sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Ana Sayfa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Shorts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Abonelikler</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Youtube Music</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column">
+        <b>Siz ></b>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Kanalınız</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Geçmişiniz</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Oynatma Listeleri</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Videolarınız</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Daha sonra izle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Beğendiğim videolar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">İndirilenler</a>
+            </li>
+        </ul>
+         <ul class="nav flex-column">
+        <b>Abonelikler</b>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">A</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">B</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">C</a>
+            </li>
+        </ul>
+
+         <ul class="nav flex-column">
+        <b>Keşfet</b>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Trendler</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Müzik</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Canlı</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Oyun</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Spor</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column">
+        <b>Youtubedan Daha Fazlası</b>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Youtube Studio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Youtube Music</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Youtube Kids</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Video Oynatıcı</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                <h2 class="mt-3">Video Başlığı</h2>
+                <p class="video-meta">100.000 görüntüleme - 1 hafta önce</p>
+                <p>Bu video açıklaması burada yer alacak. Buraya video hakkında bilgiler yazabilirsiniz.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Önerilen Videolar</h5>
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 1">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 1</h6>
+                                <p class="video-meta">50.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 2">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 2</h6>
+                                <p class="video-meta">30.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 3">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 3</h6>
+                                <p class="video-meta">20.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 4">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 4</h6>
+                                <p class="video-meta">10.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 5">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 5</h6>
+                                <p class="video-meta">5.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://via.placeholder.com/150" alt="Video 6">
+                            </div>
+                            <div class="p-2">
+                                <h6 class="video-title">Önerilen Video 6</h6>
+                                <p class="video-meta">3.000 görüntüleme</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
